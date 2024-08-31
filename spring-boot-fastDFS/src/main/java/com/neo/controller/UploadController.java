@@ -2,6 +2,7 @@ package com.neo.controller;
 
 import com.neo.fastdfs.FastDFSClient;
 import com.neo.fastdfs.FastDFSFile;
+import io.github.pixee.security.Filenames;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -55,7 +56,7 @@ public class UploadController {
      */
     public String saveFile(MultipartFile multipartFile) throws IOException {
         String[] fileAbsolutePath={};
-        String fileName=multipartFile.getOriginalFilename();
+        String fileName=Filenames.toSimpleFileName(multipartFile.getOriginalFilename());
         String ext = fileName.substring(fileName.lastIndexOf(".") + 1);
         byte[] file_buff = null;
         InputStream inputStream=multipartFile.getInputStream();

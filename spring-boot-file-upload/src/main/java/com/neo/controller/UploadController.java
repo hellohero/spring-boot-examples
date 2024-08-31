@@ -1,5 +1,6 @@
 package com.neo.controller;
 
+import io.github.pixee.security.Filenames;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,7 +34,7 @@ public class UploadController {
         try {
             // Get the file and save it somewhere
             byte[] bytes = file.getBytes();
-            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+            Path path = Paths.get(UPLOADED_FOLDER + Filenames.toSimpleFileName(file.getOriginalFilename()));
             Files.write(path, bytes);
 
             redirectAttributes.addFlashAttribute("message",
